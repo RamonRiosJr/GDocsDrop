@@ -1,0 +1,30 @@
+title = "Coqui Cloud Secret Guard (Gitleaks Configuration)"
+
+[extend]
+useDefault = true
+
+[[rules]]
+id = "cloudflare-api-token"
+description = "Cloudflare User/Account API Token (cfut_)"
+regex = '''\bcfut_[A-Za-z0-9_]{20,}\b'''
+tags = ["key", "cloudflare"]
+
+[[rules]]
+id = "google-oauth-client-secret"
+description = "Google OAuth Client Secret (GOCSPX-)"
+regex = '''\bGOCSPX-[A-Za-z0-9_-]{15,}\b'''
+tags = ["key", "google"]
+
+[[rules]]
+id = "pgp-or-ssh-private-key"
+description = "PGP or SSH Private Key Block"
+regex = '''-----BEGIN [A-Z0-9 ]*PRIVATE KEY( BLOCK)?-----'''
+tags = ["key", "private"]
+
+[allowlist]
+description = "Ignore example templates and SHA-256 digest lists"
+paths = [
+  '''\.env\.example$''',
+  '''\.githooks/secret_blocker\.py$'''
+]
+

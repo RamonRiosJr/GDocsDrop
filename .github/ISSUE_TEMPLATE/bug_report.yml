@@ -1,0 +1,34 @@
+name: Bug Report
+description: Report an issue with GDocsDrop sync, Explorer icons, or UI
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for taking the time to report a bug!
+  - type: input
+    id: version
+    attributes:
+      label: GDocsDrop Version
+      placeholder: e.g. v1.0.0
+    validations:
+      required: true
+  - type: input
+    id: os
+    attributes:
+      label: Windows Version & Google Drive for Desktop Status
+      placeholder: e.g. Windows 11 24H2, DriveFS mounted at G:\My Drive
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+      description: Describe the issue clearly and include steps to reproduce.
+    validations:
+      required: true
+  - type: textarea
+    id: trace
+    attributes:
+      label: Dry-Run Trace (Optional)
+      description: Paste output from `--dry-run --test-out trace.log` (redact personal email/paths if preferred).
+      render: text

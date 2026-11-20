@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+if command -v python3 >/dev/null 2>&1; then
+    python3 "$(git rev-parse --show-toplevel)/.githooks/secret_blocker.py"
+else
+    python "$(git rev-parse --show-toplevel)/.githooks/secret_blocker.py"
+fi

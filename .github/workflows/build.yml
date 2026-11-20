@@ -1,0 +1,39 @@
+name: Windows CI Build
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build GDocsDrop (Windows)
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build executable and SHA256SUMS
+        shell: powershell
+        run: .\scripts\build.ps1
+
+      - name: Verify compiled artifact
+        shell: powershell
+        run: |
+          $exe = Get-Item .\dist\GDocsDrop-Windows.exe
+          if ($exe.Length -lt 20480) {
+            throw "Unexpected small binary size: $($exe.Length)"
+          }
+          Write-Host "Verified $($exe.Name): $($exe.Length) bytes"
+          Get-Content .\dist\SHA256SUMS.txt
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: GDocsDrop-Windows
+          path: |
+            dist/GDocsDrop-Windows.exe
+            dist/SHA256SUMS.txt

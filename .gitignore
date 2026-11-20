@@ -1,0 +1,28 @@
+# Build artifacts
+dist/
+bin/
+obj/
+*.exe
+*.pdb
+*.user
+
+# Local proprietary icons extracted during -Install
+icons/
+
+# Runtime logs & temp files
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
+
+# Environment & credentials
+.env
+.env.*
+!.env.example
+!.env.sample
+!.env.template
+
+# IDE
+.vs/
+.vscode/
+*.suo
